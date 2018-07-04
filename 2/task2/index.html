@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Task2</title>
+		        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+		
+		<link href="css/my.css" rel="stylesheet">
+		
+    </head>
+    <body>
+	
+		 <div class="container">
+		 
+			<form class="main-form form-inline" onsubmit="send()">
+			  <div class="form-group ">
+				<input type="text" class="form-control" id="input">
+			  </div>
+			  <div class="form-group">
+				<select id="select">
+					<option>posts</option>
+					<option>comments</option>
+					<option>albums</option>
+					<option>photos</option>
+					<option>todos</option>
+					<option>users</option>
+				</select>
+			  </div>
+			  <button type="submit" class="btn btn-success">Ok</button>
+			</form>
+			
+			<div class="results" id="results">
+				<table class="table" id="table">
+					<tr>
+						<th>userid</th>
+						<th>id</th>
+						<th>title</th>
+						<th>body</th>
+					</tr>
+					<tr>
+						<td>sdfsd</td>
+						<td>sdfsd</td>
+						<td>sdfsd</td>
+						<td>sdfsd</td>
+						<td>sdfsd</td>
+					</tr>
+				</table>
+			</div>
+			
+		 </div>
+	
+		<script src="js/script.js"></script>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+	</body>
+	</html>
