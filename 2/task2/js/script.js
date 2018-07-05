@@ -1,59 +1,74 @@
-function send(){
+function checkStorage(){
+	if (localStorage.length!=0){
+		let entry = JSON.parse(localStorage.getItem('entry'));
+		showOnTable(entry);
+	}
+}
+
+
+function sendRequest(){
 	
-	console.log("sending!");
-	/*
-	fetch('https://jsonplaceholder.typicode.com/posts/1')
-  .then(response => response.json())
-  .then(json => console.log(json));
-  */
-  
-  /*writing();*/
-  getting();
+	let selectCat=document.getElementById("select");
+	let category=selectCat[selectCat.selectedIndex].text;
+	let num=document.getElementById("input").value;
+	let url="";
+	if (num==""){
+		url=`https://jsonplaceholder.typicode.com/${category}`;
+	}else{
+		url=`https://jsonplaceholder.typicode.com/${category}/${num}`
+	}
+
+	  fetch(url)
+	  .then(response => response.json())
+	  .then(json=>{
+		  localStorage.setItem('entry', JSON.stringify(json));
+		  showOnTable(json);
+	  });
+
+}
+
+function showOnTable(entry){
+	let t = document.getElementById("table");
+	let table=objToTable(entry);
+	t.innerHTML=objToTable(entry);
 }
 
 function objToTable(o){
-	
-	let table='<tr>';
-	for(key in o){
-		table+='<th>'+key+'</th>';
+	let table='';
+	if (o.length){
+		table+='<tr>';
+		for(key in o[0]){
+			table+='<th>'+key+'</th>';
+		}
+		table+='</tr>';
+		
+		for(row in o){
+			table+='<tr>';
+			for (cell in o[row]){
+				table+='<td>'+o[row][cell]+'</td>';
+			}
+			
+			table+='</tr>';
+		}
+	}else{
+		
+		table+='<tr>';
+		for(key in o){
+			table+='<th>'+key+'</th>';
+		}
+		table+='</tr>';
+		
+		table+='<tr>';
+		for(key in o){
+			table+='<td>'+o[key]+'</td>';
+		}
+		table+='</tr>';
 	}
-	table+='</tr>';
-	
-	table+='<tr>';
-	for(key in o){
-		table+='<td>'+o[key]+'</td>';
-	}
-	table+='</tr>';
-
 	return table;
 }
 
-function getting(){
-	let restoredObj = JSON.parse(localStorage.getItem('entry'));
-	console.log(restoredObj);
-	let tables = document.getElementById("results");
-	
-	let t = document.createElement("table");
-	t.className="table";
-	let table=objToTable(restoredObj);
-	t.innerHTML=objToTable(restoredObj);
-	
-	tables.appendChild(t);
-	
-	
-}
 
 
-function writing(){
-	let entry={
-	  "userId": 1,
-	  "id": 1,
-	  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-	  "body": "quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto"
-	};
-	localStorage.setItem('entry', JSON.stringify(entry));
-
-}
 
 
 
